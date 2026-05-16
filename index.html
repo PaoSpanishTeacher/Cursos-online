@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talleres de IA — Pao Spanish Teacher</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-dark: #2d6a4f;
+      --green-mid: #52b788;
+      --green-light: #b7e4c7;
+      --pink: #e84393;
+      --pink-light: #ffd6ec;
+      --purple: #7c3aed;
+      --purple-light: #ede9fe;
+      --cream: #fdf6ec;
+      --cream-dark: #f5ead6;
+      --text: #2c2c2c;
+      --text-light: #6b6b6b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #1b4332, #2d6a4f);
+      padding: 60px 5% 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,67,147,0.2) 0%, transparent 70%);
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 250px; height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
+    }
+    .header-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      color: var(--green-light);
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    header h1 em { color: var(--pink-light); font-style: italic; }
+    header p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.75;
+      max-width: 580px;
+      margin: 0 auto 28px;
+      position: relative;
+      z-index: 1;
+    }
+    .header-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pink);
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 12px 26px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(232,67,147,0.35);
+      position: relative;
+      z-index: 1;
+    }
+    .header-btn:hover { transform: translateY(-2px); background: #c73080; }
+
+    /* ── WAVE ── */
+    .wave {
+      display: block;
+      width: 100%;
+      height: 50px;
+      background: var(--cream);
+      clip-path: ellipse(55% 100% at 50% 100%);
+      margin-top: -2px;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      text-align: center;
+      padding: 50px 5% 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .intro .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--pink);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .intro h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: var(--green-dark);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .intro p {
+      font-size: 0.98rem;
+      color: var(--text-light);
+      line-height: 1.75;
+    }
+
+    /* ── WORKSHOPS ── */
+    .workshops {
+      padding: 40px 5% 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+
+    .workshop-card {
+      background: #fff;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 2px solid var(--green-light);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+      transition: all 0.3s;
+    }
+    .workshop-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      border-color: var(--pink-light);
+    }
+
+    /* Taller number badge */
+    .taller-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .badge-1 { background: #fef3c7; color: #92400e; }
+    .badge-2 { background: var(--purple-light); color: var(--purple); }
+    .badge-3 { background: var(--pink-light); color: var(--pink); }
+
+    /* Image full width */
+    .workshop-img {
+      width: 100%;
+      display: block;
+      border-bottom: 2px solid var(--green-light);
+    }
+
+    /* Card body */
+    .workshop-body {
+      padding: 36px 40px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .workshop-info { flex: 1; min-width: 260px; }
+    .workshop-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--green-dark);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .workshop-info p {
+      font-size: 0.92rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+    .workshop-meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--text-light);
+      background: var(--cream-dark);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    /* Price + CTA */
+    .workshop-cta {
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .price-box {
+      background: var(--pink-light);
+      border-radius: 20px;
+      padding: 20px 32px;
+      margin-bottom: 16px;
+    }
+    .price-label {
+      font-size: 0.72rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--pink);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .price-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: var(--pink);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .price-amount span {
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+    .price-note {
+      font-size: 0.72rem;
+      color: var(--pink);
+      margin-top: 4px;
+    }
+    .btn-reserve {
+      display: block;
+      background: var(--green-dark);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(45,106,79,0.25);
+      white-space: nowrap;
+    }
+    .btn-reserve:hover {
+      background: var(--pink);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,67,147,0.3);
+    }
+    .cupos-note {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      margin-top: 10px;
+    }
+    .cupos-note strong { color: var(--pink); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-dark);
+      color: #fff;
+      text-align: center;
+      padding: 44px 5%;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    .footer-logo span { color: var(--pink-light); }
+    footer p { font-size: 0.85rem; opacity: 0.75; line-height: 1.7; }
+    footer a { color: var(--green-light); text-decoration: none; font-weight: 500; }
+    footer a:hover { color: var(--pink-light); }
+    .hearts { color: var(--pink-light); margin-top: 14px; display: block; }
+
+    /* ── ANIMATIONS ── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .workshop-body { padding: 28px 24px 32px; flex-direction: column; }
+      .workshop-cta { width: 100%; }
+      .price-box { padding: 16px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-tag">🤖 Talleres de Inteligencia Artificial</div>
+    <h1>Aprende a crear con <em>IA</em><br>desde cero ♥</h1>
+    <p>Talleres online en vivo, 100% básicos y para principiantes. No necesitas experiencia en diseño ni programación — solo ganas de aprender.</p>
+    <a href="https://bejewelled-pastelito-a1e1ee.netlify.app" class="header-btn">🌿 Volver a Pao Spanish Teacher →</a>
+  </header>
+  <div class="wave"></div>
+
+  <div class="intro fade-in">
+    <div class="section-label">3 Talleres disponibles</div>
+    <h2>Crea contenido increíble con Inteligencia Artificial ♥</h2>
+    <p>Cada taller dura 2 clases en vivo de 2 horas cada una. Todo explicado paso a paso, con herramientas gratuitas. ¡Tú puedes! 🚀</p>
+  </div>
+
+  <div class="workshops">
+
+    <!-- TALLER 1 -->
+    <div class="workshop-card fade-in">
+      <img src="ChatGPT_Image_16_may_2026__16_32_37.png" alt="Taller 1 - Crea Videos de Cuentos con IA" class="workshop-img" />
+      <div class="workshop-body">
+        <div class="workshop-info">
+          <div class="taller-badge badge-1">⭐ Taller 1</div>
+          <h3>Crea Videos de Cuentos con IA</h3>
+          <p>Aprende a crear videos de cuentos utilizando Inteligencia Artificial, paso a paso, aunque nunca hayas tenido experiencia. Ideal para TikTok, Reels y redes sociales.</p>
+          <div class="workshop-meta">
+            <div class="meta-item">📅 2 clases en vivo</div>
+            <div class="meta-item">⏰ 2 horas por clase</div>
+            <div class="meta-item">💻 Online en vivo</div>
+            <div class="meta-item">🎯 100% para principiantes</div>
+          </div>
+        </div>
+        <div class="workshop-cta">
+          <div class="price-box">
+            <div class="price-label">Inversión</div>
+            <div class="price-amount">10<span>$</span></div>
+            <div class="price-note">USD · pago único</div>
+          </div>
+          <a href="TU_LINK_TALLER_1" target="_blank" class="btn-reserve">Reservar mi lugar →</a>
+          <div class="cupos-note"><strong>¡Cupos limitados!</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TALLER 2 -->
+    <div class="workshop-card fade-in">
+      <img src="ChatGPT_Image_16_may_2026__16_32_55.png" alt="Taller 2 - Crea Imágenes con IA" class="workshop-img" />
+      <div class="workshop-body">
+        <div class="workshop-info">
+          <div class="taller-badge badge-2">✨ Taller 2</div>
+          <h3>Crea Imágenes con IA desde Cero</h3>
+          <p>Aprende a crear imágenes increíbles con IA aunque nunca hayas usado esta tecnología. Para TikTok, redes sociales, cuentos, infografías y proyectos personales.</p>
+          <div class="workshop-meta">
+            <div class="meta-item">📅 2 clases en vivo</div>
+            <div class="meta-item">⏰ 2 horas por clase</div>
+            <div class="meta-item">💻 Online en vivo</div>
+            <div class="meta-item">🎯 100% para principiantes</div>
+          </div>
+        </div>
+        <div class="workshop-cta">
+          <div class="price-box">
+            <div class="price-label">Inversión</div>
+            <div class="price-amount">10<span>$</span></div>
+            <div class="price-note">USD · pago único</div>
+          </div>
+          <a href="TU_LINK_TALLER_2" target="_blank" class="btn-reserve">Reservar mi lugar →</a>
+          <div class="cupos-note"><strong>¡Cupos limitados!</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TALLER 3 -->
+    <div class="workshop-card fade-in">
+      <img src="ChatGPT_Image_16_may_2026__16_33_11.png" alt="Taller 3 - Crea Juegos Interactivos con IA" class="workshop-img" />
+      <div class="workshop-body">
+        <div class="workshop-info">
+          <div class="taller-badge badge-3">🎮 Taller 3</div>
+          <h3>Crea Juegos Interactivos con IA</h3>
+          <p>¿Te gustaría crear juegos interactivos aunque no sepas diseño ni programación? Aprende a usar ChatGPT y Gemini para crear actividades educativas divertidas para tus clases.</p>
+          <div class="workshop-meta">
+            <div class="meta-item">📅 2 clases en vivo</div>
+            <div class="meta-item">⏰ 2 horas por clase</div>
+            <div class="meta-item">💻 Online en vivo</div>
+            <div class="meta-item">🎯 100% para principiantes</div>
+          </div>
+        </div>
+        <div class="workshop-cta">
+          <div class="price-box">
+            <div class="price-label">Inversión</div>
+            <div class="price-amount">10<span>$</span></div>
+            <div class="price-note">USD · pago único</div>
+          </div>
+          <a href="TU_LINK_TALLER_3" target="_blank" class="btn-reserve">Reservar mi lugar →</a>
+          <div class="cupos-note"><strong>¡Cupos limitados!</strong></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-logo">Pao <span>Spanish</span> Teacher</div>
+    <p>Enseño con amor, inspiro y creo experiencias que transforman ♥<br>
+    <a href="https://bejewelled-pastelito-a1e1ee.netlify.app" target="_blank">↗ Visita mi página principal</a></p>
+    <span class="hearts">♥ ♥ ♥</span>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
